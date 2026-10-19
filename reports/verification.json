@@ -1,0 +1,20 @@
+{
+  "pytest": {
+    "passed": 19,
+    "failed": 0
+  },
+  "notebook": {
+    "code_cells_executed": 8,
+    "errors": 0
+  },
+  "app_smoke": [
+    "inicio",
+    "película:10 recomendaciones",
+    "usuario nuevo:10 y fallback explícito",
+    "usuario con historial:10"
+  ],
+  "selection_locked_before_test": true,
+  "dataset_not_versioned": true,
+  "pdf_pages": 4,
+  "pdf_visual_review": "4 páginas renderizadas, sin recortes y con fuentes Unicode embebidas"
+}

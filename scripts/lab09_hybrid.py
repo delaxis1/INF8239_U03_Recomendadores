@@ -42,7 +42,7 @@ for user_id in evaluable["userId"].unique():
     history = train.loc[train["userId"].eq(user_id) & train["movieId"].isin(movie_row), ["movieId", "rating"]]
     history_rows = [movie_row[int(item)] for item in history["movieId"]]
     weights = np.clip(history["rating"].to_numpy() - 2.5, 0.1, None)
-    profile = genre_matrix[history_rows].multiply(weights[:, None]).sum(axis=0) / weights.sum()
+    profile = np.asarray(genre_matrix[history_rows].multiply(weights[:, None]).sum(axis=0)) / weights.sum()
     candidate_rows = [movie_row[int(item)] for item in collaborative["movieId"]]
     content_scores = cosine_similarity(profile, genre_matrix[candidate_rows]).ravel()
     content_min, content_max = content_scores.min(), content_scores.max()

@@ -1,0 +1,31 @@
+movieId,title,genres,content_score,query
+166461,Moana (2016),Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+53121,Shrek the Third (2007),Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+103755,Turbo (2013),Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+3114,Toy Story 2 (1999),Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+4016,"Emperor's New Groove, The (2000)",Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+3754,"Adventures of Rocky and Bullwinkle, The (2000)",Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+136016,The Good Dinosaur (2015),Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+45074,"Wild, The (2006)",Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+65577,"Tale of Despereaux, The (2008)",Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+2294,Antz (1998),Adventure|Animation|Children|Comedy|Fantasy,1.0000000000000002,Toy Story (1995)
+7377,"United States of Leland, The (2003)",Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+50442,Alpha Dog (2007),Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+1804,"Newton Boys, The (1998)",Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+168266,T2: Trainspotting (2017),Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+25788,Scarface (1932),Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+25773,Little Caesar (1931),Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+25963,"Young and the Damned, The (Olvidados, Los) (1950)",Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+43912,Freedomland (2006),Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+44204,Tsotsi (2005),Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+6852,In Cold Blood (1967),Crime|Drama,1.0000000000000002,"Shawshank Redemption, The (1994)"
+89945,BlinkyTM (2011),Horror|Sci-Fi,1.0,Alien (1979)
+84799,"Asphyx, The (1973)",Horror|Sci-Fi,1.0,Alien (1979)
+56145,"Mist, The (2007)",Horror|Sci-Fi,1.0,Alien (1979)
+512,"Puppet Masters, The (1994)",Horror|Sci-Fi,1.0,Alien (1979)
+332,Village of the Damned (1995),Horror|Sci-Fi,1.0,Alien (1979)
+58332,Diary of the Dead (2007),Horror|Sci-Fi,1.0,Alien (1979)
+6656,Attack of the Puppet People (1958),Horror|Sci-Fi,1.0,Alien (1979)
+5979,Attack of the Crab Monsters (1957),Horror|Sci-Fi,1.0,Alien (1979)
+5779,Piranha II: The Spawning (1981),Horror|Sci-Fi,1.0,Alien (1979)
+5640,"Godzilla, King of the Monsters! (Kaijû-ô Gojira) (1956)",Horror|Sci-Fi,1.0,Alien (1979)

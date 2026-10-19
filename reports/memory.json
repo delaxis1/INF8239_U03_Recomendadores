@@ -1,0 +1,6 @@
+{
+  "kernel_peak_working_set_mib": 290.14453125,
+  "samples": 400,
+  "method": "Muestreo 0.5 s; Windows peak_wset desde creaci\u00f3n; RSS muestreada en otros sistemas",
+  "scope": "m\u00e1ximo del proceso principal del kernel; no suma de picos de procesos ni RAM de todo el sistema"
+}

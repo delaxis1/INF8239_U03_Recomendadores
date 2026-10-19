@@ -1,0 +1,7 @@
+{
+  "chosen": "count",
+  "rule": "NDCG a .005 del máximo; mayor cobertura, menor costo",
+  "source": "validation_runs.csv",
+  "locked_before_test": true,
+  "locked_utc": "2026-10-19T17:33:29.342189+00:00"
+}

@@ -1,10 +1,15 @@
 .venv/
+.uv-cache/
 __pycache__/
 .pytest_cache/
+.ruff_cache/
 .ipynb_checkpoints/
 *.egg-info/
 data/raw/
-*.zip
 .env
 .env.*
+!.env.example
 models/
+
+reports/pdf_review*
+reports/*.tmp

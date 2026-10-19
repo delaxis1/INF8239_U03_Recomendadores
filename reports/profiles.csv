@@ -1,0 +1,31 @@
+profile,user,rank,movieId,title,genres,history,fallback
+amplio,414,1,1258,"Shining, The (1980)",Horror,2581,False
+amplio,414,2,19,Ace Ventura: When Nature Calls (1995),Comedy,2581,False
+amplio,414,3,410,Addams Family Values (1993),Children|Comedy|Fantasy,2581,False
+amplio,414,4,1219,Psycho (1960),Crime|Horror,2581,False
+amplio,414,5,2324,Life Is Beautiful (La Vita è bella) (1997),Comedy|Drama|Romance|War,2581,False
+amplio,414,6,8368,Harry Potter and the Prisoner of Azkaban (2004),Adventure|Fantasy|IMAX,2581,False
+amplio,414,7,317,"Santa Clause, The (1994)",Comedy|Drama|Fantasy,2581,False
+amplio,414,8,520,Robin Hood: Men in Tights (1993),Comedy,2581,False
+amplio,414,9,2710,"Blair Witch Project, The (1999)",Drama|Horror|Thriller,2581,False
+amplio,414,10,435,Coneheads (1993),Comedy|Sci-Fi,2581,False
+pequeño,475,1,356,Forrest Gump (1994),Comedy|Drama|Romance|War,15,False
+pequeño,475,2,318,"Shawshank Redemption, The (1994)",Crime|Drama,15,False
+pequeño,475,3,296,Pulp Fiction (1994),Comedy|Crime|Drama|Thriller,15,False
+pequeño,475,4,593,"Silence of the Lambs, The (1991)",Crime|Horror|Thriller,15,False
+pequeño,475,5,480,Jurassic Park (1993),Action|Adventure|Sci-Fi|Thriller,15,False
+pequeño,475,6,110,Braveheart (1995),Action|Drama|War,15,False
+pequeño,475,7,589,Terminator 2: Judgment Day (1991),Action|Sci-Fi,15,False
+pequeño,475,8,527,Schindler's List (1993),Drama|War,15,False
+pequeño,475,9,1,Toy Story (1995),Adventure|Animation|Children|Comedy|Fantasy,15,False
+pequeño,475,10,780,Independence Day (a.k.a. ID4) (1996),Action|Adventure|Sci-Fi|Thriller,15,False
+nuevo,611,1,356,Forrest Gump (1994),Comedy|Drama|Romance|War,0,True
+nuevo,611,2,318,"Shawshank Redemption, The (1994)",Crime|Drama,0,True
+nuevo,611,3,296,Pulp Fiction (1994),Comedy|Crime|Drama|Thriller,0,True
+nuevo,611,4,593,"Silence of the Lambs, The (1991)",Crime|Horror|Thriller,0,True
+nuevo,611,5,2571,"Matrix, The (1999)",Action|Sci-Fi|Thriller,0,True
+nuevo,611,6,480,Jurassic Park (1993),Action|Adventure|Sci-Fi|Thriller,0,True
+nuevo,611,7,260,Star Wars: Episode IV - A New Hope (1977),Action|Adventure|Sci-Fi,0,True
+nuevo,611,8,110,Braveheart (1995),Action|Drama|War,0,True
+nuevo,611,9,589,Terminator 2: Judgment Day (1991),Action|Sci-Fi,0,True
+nuevo,611,10,527,Schindler's List (1993),Drama|War,0,True

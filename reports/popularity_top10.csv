@@ -1,0 +1,11 @@
+movieId,mean,count,weighted_score,title,genres
+318,4.421052631578948,285,4.384604596743173,"Shawshank Redemption, The (1994)",Crime|Drama
+858,4.332369942196531,173,4.279608460717417,"Godfather, The (1972)",Crime|Drama
+2959,4.290575916230367,191,4.24496337553065,Fight Club (1999),Action|Crime|Drama|Thriller
+50,4.260526315789473,190,4.216473095211495,"Usual Suspects, The (1995)",Crime|Mystery|Thriller
+260,4.246696035242291,227,4.21015717670595,Star Wars: Episode IV - A New Hope (1977),Action|Adventure|Sci-Fi
+750,4.294444444444444,90,4.203211423850217,Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964),Comedy|War
+1197,4.265625,128,4.201625465948015,"Princess Bride, The (1987)",Action|Adventure|Comedy|Fantasy|Romance
+1196,4.240932642487047,193,4.198671049915717,Star Wars: Episode V - The Empire Strikes Back (1980),Action|Adventure|Sci-Fi
+1198,4.23876404494382,178,4.193302974909064,Raiders of the Lost Ark (Indiana Jones and the Raiders of the Lost Ark) (1981),Action|Adventure
+527,4.2317073170731705,205,4.192292927339733,Schindler's List (1993),Drama|War

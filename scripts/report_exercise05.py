@@ -28,7 +28,19 @@ for name, weight, style in [
     pdfmetrics.registerFont(
         TTFont(
             name,
-            findfont(FontProperties(family="DejaVu Sans", weight=weight, style=style)),
+            str(
+                Path("C:/Windows/Fonts")
+                / {
+                    "ReportSans": "calibri.ttf",
+                    "ReportSans-Bold": "calibrib.ttf",
+                    "ReportSans-Italic": "calibrii.ttf",
+                    "ReportSans-BoldItalic": "calibriz.ttf",
+                }[name]
+            )
+            if Path("C:/Windows/Fonts/calibri.ttf").exists()
+            else findfont(
+                FontProperties(family="DejaVu Sans", weight=weight, style=style)
+            ),
         )
     )
 pdfmetrics.registerFontFamily(
@@ -201,17 +213,17 @@ Codex (OpenAI) asistió en código, documentación y comprobaciones. Se distingu
         ParagraphStyle(
             name="BodyOwn",
             fontName="ReportSans",
-            fontSize=10,
+            fontSize=10.5,
             leading=14,
-            spaceAfter=8,
-            textColor=colors.HexColor("#263445"),
+            spaceAfter=6,
+            textColor=colors.HexColor("#1f1f1f"),
         )
     )
     styles.add(
         ParagraphStyle(
             name="SmallOwn",
             parent=styles["BodyOwn"],
-            fontSize=8,
+            fontSize=9,
             leading=11,
             spaceAfter=5,
         )
@@ -220,11 +232,11 @@ Codex (OpenAI) asistió en código, documentación y comprobaciones. Se distingu
         ParagraphStyle(
             name="HeadingOwn",
             fontName="ReportSans-Bold",
-            fontSize=14,
-            leading=17,
+            fontSize=12.5,
+            leading=16,
             spaceBefore=10,
-            spaceAfter=9,
-            textColor=colors.HexColor("#185594"),
+            spaceAfter=6,
+            textColor=colors.HexColor("#12355B"),
         )
     )
     story = []
@@ -241,59 +253,159 @@ Codex (OpenAI) asistió en código, documentación y comprobaciones. Se distingu
         story.append(Image(str(path), width=width, height=width * h / w))
         story.append(Spacer(1, 6))
 
-    def tab(rows, widths):
-        data = [
-            [Paragraph(escape(str(c)), styles["SmallOwn"]) for c in r] for r in rows
-        ]
-        t = Table(data, colWidths=widths, repeatRows=1, hAlign="LEFT")
-        t.setStyle(
-            TableStyle(
-                [
-                    ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e8f0f8")),
-                    ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                    ("LINEBELOW", (0, 0), (-1, 0), 0.8, colors.HexColor("#2a78d6")),
-                    ("LINEBELOW", (0, 1), (-1, -1), 0.25, colors.HexColor("#d7dee5")),
-                    ("LEFTPADDING", (0, 0), (-1, -1), 5),
-                    ("RIGHTPADDING", (0, 0), (-1, -1), 5),
-                    ("TOPPADDING", (0, 0), (-1, -1), 5),
-                    ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
-                ]
-            )
+    def tab(rows, widths, metadata=False):
+        data = []
+        for i, r in enumerate(rows):
+            line = []
+            for j, c in enumerate(r):
+                style = ParagraphStyle(
+                    "Cell",
+                    parent=styles["SmallOwn"],
+                    spaceAfter=0,
+                    fontSize=9,
+                    leading=11,
+                )
+                if (i == 0 and not metadata) or (metadata and j == 0):
+                    style.fontName = "ReportSans-Bold"
+                if i == 0 and not metadata:
+                    style.textColor = colors.white
+                line.append(Paragraph(escape(str(c)), style))
+            data.append(line)
+        t = Table(
+            data, colWidths=widths, repeatRows=0 if metadata else 1, hAlign="LEFT"
         )
+        commands = [
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("GRID", (0, 0), (-1, -1), 0.35, colors.HexColor("#C9CED6")),
+            ("LEFTPADDING", (0, 0), (-1, -1), 5),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 5),
+            ("TOPPADDING", (0, 0), (-1, -1), 2),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+        ]
+        if metadata:
+            commands.append(("BACKGROUND", (0, 0), (0, -1), colors.HexColor("#F2F4F7")))
+        else:
+            commands.append(("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#12355B")))
+            for i in range(2, len(rows), 2):
+                commands.append(
+                    ("BACKGROUND", (0, i), (-1, i), colors.HexColor("#F2F4F7"))
+                )
+        t.setStyle(TableStyle(commands))
         story.append(t)
-        story.append(Spacer(1, 8))
+        story.append(Spacer(1, 6))
 
-    heading("Unidad 03 · Ejercicio 05")
-    p(
-        "<b>Recomendación Top-10 con MovieLens</b><br/>Alexis De La Cruz · Matrícula 100805370<br/>INF-8239 · Ciencia de Datos II · UASD<br/>Docente: Edwin Ramón José Nolasco"
+    banner = [
+        [
+            Paragraph(
+                "UNIVERSIDAD AUTÓNOMA DE SANTO DOMINGO · MAESTRÍA EN CIENCIAS DE DATOS E INTELIGENCIA ARTIFICIAL",
+                ParagraphStyle(
+                    "BannerSmall",
+                    fontName="ReportSans-Bold",
+                    fontSize=7,
+                    leading=9,
+                    textColor=colors.HexColor("#CAD8E8"),
+                ),
+            )
+        ],
+        [
+            Paragraph(
+                "Motor recomendador con MovieLens",
+                ParagraphStyle(
+                    "BannerTitle",
+                    fontName="ReportSans-Bold",
+                    fontSize=19,
+                    leading=23,
+                    textColor=colors.white,
+                ),
+            )
+        ],
+        [
+            Paragraph(
+                "Mandato · Ejercicio 05 · Informe de entrega",
+                ParagraphStyle(
+                    "BannerSub",
+                    fontName="ReportSans",
+                    fontSize=10.5,
+                    leading=14,
+                    textColor=colors.HexColor("#E2EAF4"),
+                ),
+            )
+        ],
+    ]
+    bt = Table(banner, colWidths=[486])
+    bt.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#12355B")),
+                ("LEFTPADDING", (0, 0), (-1, -1), 6),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+                ("TOPPADDING", (0, 0), (-1, 0), 9),
+                ("BOTTOMPADDING", (0, -1), (-1, -1), 9),
+            ]
+        )
     )
-    p(f'Repositorio privado: <link href="{REPO}" color="#185594">{REPO}</link>', True)
-    heading("Datos y pregunta")
+    story.append(bt)
+    story.append(Spacer(1, 16))
+    tab(
+        [
+            ["Asignatura", "INF-8239 Ciencia de Datos II"],
+            ["Unidad", "03 · Sistemas recomendadores y modelos generativos"],
+            ["Código", "U03.E05"],
+            ["Estudiante", "Alexis De La Cruz · Matrícula 100805370"],
+            ["Fecha", "19 de octubre de 2026"],
+            [
+                "Entorno",
+                f"Windows 11 · Intel Core i9-13980HX · RAM 16 GB · Python {meta['python']} · scikit-learn {meta['sklearn']} · NVIDIA RTX 4070 Laptop, 8 GB",
+            ],
+        ],
+        [120, 366],
+        metadata=True,
+    )
+    heading("1. Repositorio")
+    p(f'<b>Enlace:</b> <link href="{REPO}" color="#1F5FAF"><u>{REPO}</u></link>')
     p(
-        f"¿Qué combinación de popularidad, contenido y factorización logra un ranking útil sin un costo de ajuste innecesario? MovieLens contiene {d['ratings']:,} calificaciones de {d['users']} usuarios y {d['movies']:,} películas. Se usan calificaciones, fecha y géneros; no se introducen atributos demográficos."
+        "Construido sobre el proyecto base LAB08-LAB09 del docente Edwin Ramón José Nolasco. El notebook descarga y verifica MovieLens, compara siete configuraciones y genera las métricas. Dataset Card, System Card y 19 pruebas automatizadas acompañan el repositorio privado."
+    )
+    heading("2. Datos y partición reproducible")
+    tab(
+        [
+            [
+                "Conjunto",
+                f"MovieLens Latest Small · {d['ratings']:,} calificaciones · {d['users']} usuarios · {d['movies']:,} películas",
+            ],
+            [
+                "Fuente",
+                "GroupLens. Términos del README original; descarga reproducible sin redistribuir los datos.",
+            ],
+            [
+                "Partición",
+                f"{split['train']:,} entrenamiento · {split['validation']:,} validación · {split['test']:,} prueba, mediante cortes temporales globales.",
+            ],
+            [
+                "Auditoría",
+                "Sin nulos, claves huérfanas ni interacciones usuario/película duplicadas.",
+            ],
+            ["Trazabilidad", d["sha256"]],
+            [
+                "Candidatos",
+                "Películas calificadas antes del corte; excluir vistas. Los relevantes fuera del catálogo cuentan como fallos.",
+            ],
+        ],
+        [120, 366],
+        metadata=True,
+    )
+    heading("3. Protocolo y elección del sistema")
+    p(
+        "Se comparan conteo, popularidad suavizada, contenido por géneros, MF con 10/20 factores e híbridos con peso colaborativo α=0.25/0.75. MF usa 12 épocas y semillas 42, 7 y 2026. Relevante significa ≥4 estrellas; las listas tienen diez títulos."
     )
     p(
-        "Fuente: GroupLens, MovieLens Latest Small. Se respetan los términos del README original y se entrega descarga reproducible, sin redistribuir los datos. Auditoría sin nulos, claves huérfanas ni interacciones usuario/película duplicadas.",
-        True,
-    )
-    p("SHA-256 del ZIP: " + d["sha256"], True)
-    heading("Protocolo y selección")
-    p(
-        f"Corte temporal global: {split['train']:,} filas para ajuste, {split['validation']:,} para validación y {split['test']:,} para prueba. Los timestamps iguales quedan juntos. Se difiere del leave-last por usuario de la base para impedir que entren calificaciones de otros usuarios posteriores al corte evaluado. El catálogo contiene solo películas ya calificadas al corte; se excluyen las vistas."
+        "El corte global conserva juntos los timestamps iguales y evita incorporar valoraciones de otros usuarios posteriores al momento evaluado. Regla previa: entre los modelos a ≤0.005 del mejor NDCG de validación, preferir cobertura y luego menor tiempo de ajuste."
     )
     p(
-        "Relevante: ≥4 estrellas. Listas de diez títulos. MF con 10/20 factores, 12 épocas y semillas 42, 7 y 2026. Híbridos con peso colaborativo α=0.25/0.75 y scores normalizados sobre el mismo catálogo. Regla previa: a ≤0.005 del mejor NDCG de validación, preferir cobertura y luego menor ajuste."
-    )
-    p(
-        f"Elección registrada antes de prueba: <b>{NAMES[chosen]}</b> (NDCG validación {val.loc[chosen, 'ndcg']:.4f}). Después se reajusta con entrenamiento + validación. No se cambia la elección por la tabla final."
-    )
-    heading("Entorno y reproducción")
-    p(
-        f"Python {meta['python']}; scikit-learn {meta['sklearn']}; uv.lock. Intel Core i9-13980HX; RAM 16 GB; NVIDIA RTX 4070 Laptop, 8 GB; Windows 11. Duración observada: {meta['seconds'] / 60:.1f} min. {memory_text} Notebook y 19 pruebas automatizadas acompañan el repositorio.",
-        True,
+        f"<b>Elección fijada antes de prueba: {NAMES[chosen]}</b>, con NDCG de validación {val.loc[chosen, 'ndcg']:.4f}. Después se reajusta con entrenamiento y validación. El resultado final no cambia esa decisión."
     )
     story.append(PageBreak())
-    heading("Resultados de prueba · promedio de tres semillas")
+    heading("4. Resultados de prueba")
     rows = [
         ["Configuración", "NDCG@10", "Hit@10", "P@10", "R@10", "Cobertura", "Ajuste(s)"]
     ]
@@ -314,6 +426,7 @@ Codex (OpenAI) asistió en código, documentación y comprobaciones. Se distingu
         f"Métricas de ranking sobre {eligible} usuarios con positivos; {int(row.users_no_positive)} sin positivos se cuentan aparte. Usuarios de prueba: {nusers}; nuevos sin historial: {cold}; relevantes fuera del catálogo: {int(row.unreachable_positives)} (cuentan como fallos). Cobertura se calcula sobre las listas de todos los usuarios y el catálogo disponible.",
         True,
     )
+    heading("5. Relevancia y cobertura del catálogo")
     image("ranking_coverage.png")
     p(
         "Figura 1. Ranking y amplitud del catálogo. Candidatos comunes para todos los métodos. La variación entre semillas no constituye intervalo de confianza; los controles deterministas se repiten sin aleatoriedad.",
@@ -327,13 +440,18 @@ Codex (OpenAI) asistió en código, documentación y comprobaciones. Se distingu
         "Los tiempos son medianas: preparación compartida más ajuste MF cuando aplica; latencia es media por usuario en lote. Tamaño del artefacto comprimido se informa en las tablas del repositorio y no equivale a memoria RAM máxima.",
         True,
     )
+    p(
+        f"Duración total del experimento: {meta['seconds'] / 60:.1f} minutos. {memory_text}",
+        True,
+    )
     story.append(PageBreak())
-    heading("Costo, cobertura y límites")
+    heading("6. Costo y frontera de Pareto")
     image("pareto.png", 450)
     p(
         "Figura 2. Frontera de utilidad/costo de ajuste en prueba (descriptiva). Azul: no dominados bajo ambos criterios; gris: dominados. La elección permanece fijada con validación.",
         True,
     )
+    heading("7. Perfiles de usuario y límites")
     profiles = pd.read_csv(out / "profiles.csv")
     rows = [["Perfil", "Historial", "Primeras recomendaciones"]]
     for key, g in profiles.groupby("profile", sort=False):
@@ -351,10 +469,10 @@ Codex (OpenAI) asistió en código, documentación y comprobaciones. Se distingu
         True,
     )
     story.append(PageBreak())
-    heading("Conclusión")
+    heading("8. Conclusión")
     for paragraph in conclusion.split("\n\n")[1:]:
         p(escape(paragraph))
-    heading("Referencias y nota del autor")
+    heading("9. Referencias y nota del autor")
     p(
         'Harper, F. M., &amp; Konstan, J. A. (2015). The MovieLens datasets: History and context. <i>ACM Transactions on Interactive Intelligent Systems, 5</i>(4), artículo 19. <link href="https://doi.org/10.1145/2827872">https://doi.org/10.1145/2827872</link>',
         True,
@@ -368,25 +486,41 @@ Codex (OpenAI) asistió en código, documentación y comprobaciones. Se distingu
         True,
     )
 
-    def page(canvas, doc):
-        canvas.setStrokeColor(colors.HexColor("#185594"))
-        canvas.setLineWidth(2)
-        canvas.line(48, 800, 547, 800)
-        canvas.setFont("ReportSans", 8)
-        canvas.setFillColor(colors.HexColor("#536477"))
-        canvas.drawString(48, 28, "Alexis De La Cruz · INF-8239 · U03.E05")
-        canvas.drawRightString(547, 28, str(doc.page))
+    from reportlab.pdfgen.canvas import Canvas
+
+    class NumberedCanvas(Canvas):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.states = []
+
+        def showPage(self):
+            self.states.append(dict(self.__dict__))
+            self._startPage()
+
+        def save(self):
+            total = len(self.states)
+            for state in self.states:
+                self.__dict__.update(state)
+                self.setFont("ReportSans", 8)
+                self.setFillColor(colors.HexColor("#5F5E5A"))
+                self.drawRightString(
+                    549,
+                    34,
+                    f"U03.E05 · Alexis De La Cruz · página {self._pageNumber} de {total}",
+                )
+                super().showPage()
+            super().save()
 
     SimpleDocTemplate(
         str(pdf),
-        pagesize=(595, 842),
-        leftMargin=48,
-        rightMargin=48,
-        topMargin=48,
-        bottomMargin=45,
+        pagesize=(612, 792),
+        leftMargin=57,
+        rightMargin=57,
+        topMargin=56,
+        bottomMargin=50,
         title="U03.E05 · Recomendadores · Alexis De La Cruz",
         author="Alexis De La Cruz",
-    ).build(story, onFirstPage=page, onLaterPages=page)
+    ).build(story, canvasmaker=NumberedCanvas)
     delivery = ROOT.parent / "Unidad03-Ejercicio05-Recomendadores"
     delivery.mkdir(exist_ok=True)
     shutil.copy2(pdf, delivery / "100805370_DeLaCruz_U03E05_Recomendadores.pdf")
